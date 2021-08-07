@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<header>
+    <title>Férias no Brasil</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
+    <style>
+        /* resets and general styles */
+
+        *{
+            margin: 0 auto;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        ::-moz-selection{
+            color: #FFFFFF;
+            background: #FF5722;
+        }
+
+        ::selection{
+            color: #FFFFFF;
+            background: #FF5722;
+        }
+
+        body{
+            font: normal 16px 'Roboto', sans-serif;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+        }
+
+        div.wrapper{
+            width: calc(4*225px);
+            margin: 0 auto;
+        }
+
+        span, a, strong{font-weight: 700;}
+        a{transition: .2s; text-decoration: none; color: #787878; border-bottom: 1px solid #607D8B;}
+        a:hover{transition: .2s; color: #FF5722;}
+
+        /* page layout */
+
+        /* header */
+
+        header{
+            width: 100%;
+            height: 50%;
+            background: #607D8B;
+        }
+
+        /* section */
+
+        section{
+            width: 100%;
+            height: 50%;
+        }
+
+        section h1, section p.meta{
+            color: #FFFFFF;
+            margin-bottom: 15px;
+        }
+
+        section hgroup{margin-top: -360px;}
+
+        section p.numbers{font-size: 6em;}
+        section p.meta,section p.strings{font-size: 1.5em;}
+        section h1{font-size: 4.5em;}
+
+        /* countdown styles */
+
+        div#countdown{color: #353535;}
+
+        div#countdown p{
+            width: 100%;
+            display: inline-block;
+            text-align: center;
+        }
+
+        p.numbers{
+            width: 100%;
+            height: 85%;
+            background: #FFFFFF;
+            margin-top: -25px;
+            padding-top: 100px;
+        }
+
+        p.strings{
+            width: 100%;
+            height: auto;
+            padding: 30px 0;
+            background: #FF5722;
+            color: #FFFFFF;
+        }
+
+        div.cd-box{
+            width: 210px;
+            height: 360px;
+            background: #FFFFFF;
+            float: left;
+            padding: 25px 0 0 0;
+            margin: 30px 15px 0 0;
+            -webkit-box-shadow: 5px 6px 9px 1px rgba(53, 53, 53, 0.5);
+            -moz-box-shadow: 5px 6px 9px 1px rgba(53, 53, 53, 0.5);
+            box-shadow: 5px 6px 9px 1px rgba(53, 53, 53, 0.5);
+        }
+
+        /* footer */
+
+        footer{
+            position: relative;
+            top: 60px;
+        }
+
+        footer p{
+            color: #787878;
+        }
+    </style>
+</header>
+<section>
+    <div class="wrapper">
+        <hgroup>
+            <h1>CONTAGEM REGRESSIVA</h1>
+            <p class="meta">Contagem regressiva pra galera mais doidera se reunir no Brasil</p>
+        </hgroup>
+
+        <div id="countdown">
+            <div class="cd-box">
+                <p class="numbers days">00</p><br>
+                <p class="strings timeRefDays">Dias</p>
+            </div>
+            <div class="cd-box">
+                <p class="numbers hours">00</p><br>
+                <p class="strings timeRefHours">Horas</p>
+            </div>
+            <div class="cd-box">
+                <p class="numbers minutes">00</p><br>
+                <p class="strings timeRefMinutes">Minutos</p>
+            </div>
+            <div class="cd-box">
+                <p class="numbers seconds">00</p><br>
+                <p class="strings timeRefSeconds">Segundos</p>
+            </div>
+        </div>
+        <!-- end div#countdown -->
+
+        <footer>
+            <p>Finalmente está chegando o dia em que nos encontraremos novamente. Todos sobreviventes da pandemia.<br/> Tá cheganndooooo.
+                Dia <strong>14 de Agosto de 2021</strong>.</p>
+            <br>
+
+        </footer>
+
+    </div>
+    <!-- end div.wrapper -->
+</section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function(){
+        //
+        (function(e){
+            e.fn.countdown = function (t, n){
+                function i(){
+                    eventDate = Date.parse(r.date) / 1e3;
+                    currentDate = Math.floor(e.now() / 1e3);
+                    //
+                    if(eventDate <= currentDate){
+                        n.call(this);
+                        clearInterval(interval)
+                    }
+                    //
+                    seconds = eventDate - currentDate;
+                    days = Math.floor(seconds / 86400);
+                    seconds -= days * 60 * 60 * 24;
+                    hours = Math.floor(seconds / 3600);
+                    seconds -= hours * 60 * 60;
+                    minutes = Math.floor(seconds / 60);
+                    seconds -= minutes * 60;
+                    //
+                    days == 1 ? thisEl.find(".timeRefDays").text("Days") : thisEl.find(".timeRefDays").text("Dias");
+                    hours == 1 ? thisEl.find(".timeRefHours").text("Hours") : thisEl.find(".timeRefHours").text("Horas");
+                    minutes == 1 ? thisEl.find(".timeRefMinutes").text("Minutes") : thisEl.find(".timeRefMinutes").text("Minutos");
+                    seconds == 1 ? thisEl.find(".timeRefSeconds").text("Seconds") : thisEl.find(".timeRefSeconds").text("Segundos");
+                    //
+                    if(r["format"] == "on"){
+                        days = String(days).length >= 2 ? days : "0" + days;
+                        hours = String(hours).length >= 2 ? hours : "0" + hours;
+                        minutes = String(minutes).length >= 2 ? minutes : "0" + minutes;
+                        seconds = String(seconds).length >= 2 ? seconds : "0" + seconds
+                    }
+                    //
+                    if(!isNaN(eventDate)){
+                        thisEl.find(".days").text(days);
+                        thisEl.find(".hours").text(hours);
+                        thisEl.find(".minutes").text(minutes);
+                        thisEl.find(".seconds").text(seconds)
+                    }
+                    else{
+                        errorMessage = "Invalid date. Example: 27 March 2015 17:00:00";
+                        alert(errorMessage);
+                        console.log(errorMessage);
+                        clearInterval(interval)
+                    }
+                }
+                //
+                var thisEl = e(this);
+                var r = {
+                    date: null,
+                    format: null
+                };
+                //
+                t && e.extend(r, t);
+                i();
+                interval = setInterval(i, 1e3)
+            }
+        })(jQuery);
+        //
+        $(document).ready(function(){
+            function e(){
+                var e = new Date;
+                e.setDate(e.getDate() + 60);
+                dd = e.getDate();
+                mm = e.getMonth() + 1;
+                y = e.getFullYear();
+                futureFormattedDate = mm + "/" + dd + "/" + y;
+                return futureFormattedDate
+            }
+            //
+            $("#countdown").countdown({
+                date: "14 August 2021 21:00:00", // change date/time here - do not change the format!
+                format: "on"
+            });
+        });
+    });
+</script>
